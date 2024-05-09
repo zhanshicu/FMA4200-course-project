@@ -1,0 +1,38 @@
+---
+title: "fma project"
+author: "Liu Yichen 121090363"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r}
+data <- read.csv("/Users/liuyichen/Desktop/fma4200/project/final_transactions_dataset.csv")
+# delete the first Sequential numbering line
+data <- data[,-1]
+# encode the company, sedctor, and investment lines
+# Create labels and encode mappings
+company_labels <- levels(factor(data$company))
+company_encode <- as.integer(factor(data$company))
+
+sector_labels <- levels(factor(data$sector))
+sector_encode <- as.integer(factor(data$sector))
+
+investment_labels <- levels(factor(data$investment))
+investment_encode <- as.integer(factor(data$investment))
+
+company_mapping <- setNames(as.integer(factor(data$company)), company_labels)
+sector_mapping <- setNames(as.integer(factor(data$sector)), sector_labels)
+investment_mapping <- setNames(as.integer(factor(data$investment)), investment_labels)
+
+# encoding
+data$company1 <- as.integer(factor(data$company))
+data$sector1 <- as.integer(factor(data$sector))
+data$investment1 <- as.integer(factor(data$investment))
+
+print(table(data$company))
+print(table(data$sector))
+print(table(data$investment))
+
+write.csv(data, file = "/Users/liuyichen/Desktop/fma4200/project/edit_final_transactions_dataset.csv", row.names = FALSE)
+```
+
